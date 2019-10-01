@@ -8,7 +8,7 @@ import xml.etree.cElementTree as ET
 SYMBOLS = ['(', ')', '[', ']', '{', '}', ',', ';', '=', '.', '+', '-', '*', '/', '&', '|', '~', '<', '>']
 KEYWORDS = ['class', 'constructor', 'method', 'function', 'int', 'boolean', 'char', 'void', 'var',
             'static', 'field', 'let', 'do', 'if', 'else', 'while', 'return', 'true', 'false', 'null', 'this']
-#Test
+
 
 def main():
     symbol = "symbol"
@@ -19,14 +19,16 @@ def main():
     bool_const = "booleanConstant"
     root = ET.Element("tokens")
 
-    # This reads the file one character at a time
+    # This reads the file one word at a time
     with open('Square.jack', 'r') as f:
-        while True:
-            c = f.read(1)
-            if not c:
-                print("End of file")
-                break
-            print("Read a character:", c)
+        for line in f:
+            line = line.partition('//')[0]
+            if line.__contains__('/**'):
+                while not line.__contains__('*/'):
+                    line = f.__next__()
+                line = f.__next__()
+            print(line)
+
     # ET.SubElement(root, "field1", name="blah").text = "some value1"
     # ET.SubElement(root, "field2", name="asdfasd").text = "some vlaue2"
     f.close()
