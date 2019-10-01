@@ -30,7 +30,7 @@ def main():
             print(line)
 
     # ET.SubElement(root, "field1", name="blah").text = "some value1"
-    # ET.SubElement(root, "field2", name="asdfasd").text = "some vlaue2"
+    # ET.SubElement(root, "field2", name="asdfasd").text = "some value2"
     f.close()
     # tree = ET.ElementTree(root)
     # tree.write("filename.xml")
