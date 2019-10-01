@@ -19,7 +19,7 @@ def main():
     bool_const = "booleanConstant"
     root = ET.Element("tokens")
 
-    # This reads the file one word at a time
+    # This is the file reading process
     with open('Square.jack', 'r') as f:
         for line in f:
             line = line.partition('//')[0]
