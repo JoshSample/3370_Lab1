@@ -8,6 +8,7 @@ from xml.etree.ElementTree import Element, SubElement, ElementTree
 SYMBOLS = ['(', ')', '[', ']', '{', '}', ',', ';', '=', '.', '+', '-', '*', '/', '&', '|', '~', '<', '>']
 KEYWORDS = ['class', 'constructor', 'method', 'function', 'int', 'boolean', 'char', 'void', 'var',
             'static', 'field', 'let', 'do', 'if', 'else', 'while', 'return', 'true', 'false', 'null', 'this']
+DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 
 def main():
@@ -28,19 +29,26 @@ def main():
                 line = f.__next__()
             # Tokenize keywords
             count = 0
-            for item in line.split():
-                if any(x in KEYWORDS for x in line.split()):
+            for word in line:
+                if any(word in KEYWORDS for word in line.split()):
                     keyw = SubElement(root, reserved_word)
                     keyw.text = line.split()[count]
                     line = line.replace(line.split()[count], '')
                     count += count
-
-            # Tokenize symbols
-            for character in line:
-                if any(x in SYMBOLS for x in character):
-                    char = SubElement(root, symbol)
-                    char.text = character
-                    line = line.replace(character, '')
+                for character in line:
+                    if any(x in SYMBOLS for x in character):
+                        char = SubElement(root, symbol)
+                        char.text = character
+                        line = line.replace(character, '')
+                    if any(x in DIGITS for x in character):
+                        line = line.replace(character, '')
+            for word in line.split():
+                if not word:
+                    continue
+                else:
+                    iden = SubElement(root, identifier)
+                    iden.text = word
+                    line = line.replace(line, '')
             print(line.split())
     # Close file
     f.close()
