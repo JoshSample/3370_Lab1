@@ -27,17 +27,24 @@ def main():
                     line = f.__next__()
                 line = f.__next__()
             # Tokenize keywords
-            if any(x in KEYWORDS for x in line.split()):
-                keyw = SubElement(root, reserved_word)
-                keyw.text = line.split()[0]
+            count = 0
+            for item in line.split():
+                if any(x in KEYWORDS for x in line.split()):
+                    keyw = SubElement(root, reserved_word)
+                    keyw.text = line.split()[count]
+                    line = line.replace(line.split()[count], '')
+                    count += count
+
             # Tokenize symbols
             for character in line:
                 if any(x in SYMBOLS for x in character):
                     char = SubElement(root, symbol)
                     char.text = character
                     line = line.replace(character, '')
-
+            print(line.split())
+    # Close file
     f.close()
+    # Write xml file
     tree = ElementTree(root)
     tree.write("filename.xml")
 
