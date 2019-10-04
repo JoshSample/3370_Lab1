@@ -36,13 +36,16 @@ def main():
                     keyw.text = line.split()[count]
                     line = line.replace(line.split()[count], '')
                     count += count
+                # Tokenize Symbols
                 for character in line:
                     if any(x in SYMBOLS for x in character):
                         char = SubElement(root, symbol)
                         char.text = character
                         line = line.replace(character, '')
+                    # Remove digits
                     if any(x in DIGITS for x in character):
                         line = line.replace(character, '')
+            # Tokenize identifiers
             for word in line.split():
                 if not word:
                     continue
@@ -68,19 +71,23 @@ def main():
                 line = f.__next__()
             # Tokenize keywords
             count = 0
+            # Tokenize Symbols
             for word in line:
                 if any(word in KEYWORDS for word in line.split()):
                     keyw = SubElement(root, reserved_word)
                     keyw.text = line.split()[count]
                     line = line.replace(line.split()[count], '')
                     count += count
+                # Tokenize Symbols
                 for character in line:
                     if any(x in SYMBOLS for x in character):
                         char = SubElement(root, symbol)
                         char.text = character
                         line = line.replace(character, '')
+                    # Remove digits
                     if any(x in DIGITS for x in character):
                         line = line.replace(character, '')
+            # Tokenize identifiers
             for word in line.split():
                 if not word:
                     continue
@@ -112,13 +119,16 @@ def main():
                     keyw.text = line.split()[count]
                     line = line.replace(line.split()[count], '')
                     count += count
+                # Tokenize Symbols
                 for character in line:
                     if any(x in SYMBOLS for x in character):
                         char = SubElement(root, symbol)
                         char.text = character
                         line = line.replace(character, '')
+                    # Remove digits
                     if any(x in DIGITS for x in character):
                         line = line.replace(character, '')
+            # Tokenize identifiers
             for word in line.split():
                 if not word:
                     continue
@@ -150,13 +160,16 @@ def main():
                         keyw.text = line.split()[count]
                         line = line.replace(line.split()[count], '')
                         count += count
+                    # Tokenize Symbols
                     for character in line:
                         if any(x in SYMBOLS for x in character):
                             char = SubElement(root, symbol)
                             char.text = character
                             line = line.replace(character, '')
+                        # Remove digits
                         if any(x in DIGITS for x in character):
                             line = line.replace(character, '')
+                # Tokenize identifiers
                 for word in line.split():
                     if not word:
                         continue
